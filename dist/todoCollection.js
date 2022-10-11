@@ -14,12 +14,10 @@ class TodoCollection {
         while (this.getTodoById(this.nextId)) {
             this.nextId++;
         }
-        // this.todoItems.push(new TodoItem(this.nextId, task));
         this.itemMap.set(this.nextId, new todoItem_1.TodoItem(this.nextId, task));
         return this.nextId;
     }
     getTodoById(id) {
-        // return this.todoItems.find(item => item.id === id);
         return this.itemMap.get(id);
     }
     getTodoItems(includeComplete) {
@@ -31,6 +29,13 @@ class TodoCollection {
         if (todoItem) {
             todoItem.complete = complete;
         }
+    }
+    removeComplete() {
+        this.itemMap.forEach(item => {
+            if (item.complete) {
+                this.itemMap.delete(item.id);
+            }
+        });
     }
 }
 exports.TodoCollection = TodoCollection;
